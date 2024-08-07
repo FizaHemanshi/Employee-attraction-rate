@@ -3,32 +3,36 @@ import pandas as pd
 import numpy as np
 import pickle
 
-#Load then model
-clf = pickel.load(open("my model.pkl","rb"))
+# Load the model
+clf = pickle.load(open("case_study_emp.pkl","rb"))
 
 def predict(data):
-    clf = pickel.load(open("my model.pkl","rb"))
-    return clf.predict(data)
+	return clf.predict(data)
 
 
-st.title("Advertising Spends Prediction using Machine Learning")
-st.markdown("This Model Identify total spends on advertising")
+st.title("Employee Attrition Rate Project using Machine Learning")
+st.markdown("This Model Identify weather performance of employee are good no not")
 
-st.header("Advertising Spend on various Media")
-col1,col2=st.columns(2)
+st.header("Employee Details")
+col1,col2 = st.columns(2)
 
 with col1:
-    st.text("TV")
-    tv = st.slider("Adver. spends on TV", 1.0, 10000.0, 0.5)
-    st.text("Radio")
-    rd = st.slider("Adver. spends on Radio", 1.0, 10000.0, 0.5)
-    st.text("Newspaper")
-    newspaper = st.slider("Adver. spends on Newspaper", 1.0, 10000.0, 0.5)
-    st.text("")
-    if st.button("Sales prediction"):
-        result = clf.predict(np.array([[tv, rd, newspaper]])
-        st.text(result[0])
-                             
-                             
-        
-   st.markdown("Developed By fiza and hemanshi Pawar at NIELIT Daman")                    
+	st.text("Education Level")
+	el=st.slider("Education Level", 1,5,2)
+	st.text("Time of Service")
+	tos = st.slider("Time of Service", 1.0, 100.0, 0.5)
+	st.text("Time of Promotion")
+	top = st.slider("Time of Promotion", 0.0, 50.0, 0.5)
+	
+with col2:
+	st.text("Growth Rate")
+	gr = st.slider("Growth Rate", 1,5,2)
+	st.text("Post Level")
+	gr1 = st.slider("Post Level", 1,5,2)
+
+st.text('')
+if st.button("Predict Performance Rate"):
+    result = clf.predict(
+        np.array([[el,tos,top,gr,gr1,1,1,1,1,1,0]]))
+    st.text(result[0])
+st.markdown("Developed by Pratha")
